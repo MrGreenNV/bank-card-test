@@ -26,13 +26,4 @@ public abstract class DebitCard extends BankCard {
         super.deposit(amount);
     }
 
-    @Override
-    protected Boolean pay(double amount) {
-        if (super.pay(amount)) {
-            System.out.println("Платеж на сумму: " + amount + " успешно проведен.");
-            return true;
-        } else {
-            return false;
-        }
-    }
 }

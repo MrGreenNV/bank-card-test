@@ -46,8 +46,9 @@ public abstract class BankCard {
      */
     protected Boolean pay(double amount) {
 
-        if (amount > 0 && amount <= this.balance) {
+        if (amount >= 0 && amount <= this.balance) {
             this.balance -= amount;
+            System.out.println("Платеж на сумму: " + amount + " успешно проведен.");
             return true;
         }
 

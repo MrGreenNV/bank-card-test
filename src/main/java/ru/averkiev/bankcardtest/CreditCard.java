@@ -49,8 +49,9 @@ public abstract class CreditCard extends BankCard {
      * Позволяет установить размер кредитного лимита по карте.
      * @param creditLimit кредитный лимит.
      */
-    protected void setCreditLimit(double creditLimit) {
-        if (creditLimit >= 0) {
+    protected final void setCreditLimit(double creditLimit) {
+        if (creditLimit >= 0 && creditLimit >= (this.creditLimit - this.creditFunds)) {
+            this.creditFunds += creditLimit - this.creditLimit;
             this.creditLimit = creditLimit;
         }
     }
@@ -65,19 +66,15 @@ public abstract class CreditCard extends BankCard {
         if (debt > 0) {
             if (amount <= debt) {                   // Если размер платежа меньше или равен задолженности по кредитному счету.
                 this.creditFunds += amount;
-                System.out.println("Внесенная сумма: " + amount + " ушла на погашение кредита.");
-                showAvailableFunds();
+                System.out.println("Внесенная сумма: " + amount + " ушла на погашение задолженности.");
             } else {                                // Если размер платежа больше задолженности по кредитному счету.
                 this.creditFunds = this.creditLimit;
                 amount -= debt;
                 super.deposit(amount);
-                System.out.println("Часть внесенной суммы: " + debt + " ушла на погашение кредита.");
-                showAvailableFunds();
+                System.out.println("Часть внесенной суммы: " + debt + " ушла на погашение задолженности.");
             }
         } else {
             super.deposit(amount);
-            System.out.println("Счет пополнен на сумму: " + amount + ".");
-            showAvailableFunds();
         }
     }
 
@@ -93,25 +90,20 @@ public abstract class CreditCard extends BankCard {
             return false;
         }
         if (super.getBalance() >= amount) {         // Если собственных средств достаточно для проведения платежа.
-            if (super.pay(amount)) {
-                System.out.println("Платеж на сумму: " + amount + " успешно проведен.");
-                showAvailableFunds();
-                return true;
-            } else {
-                return false;
-            }
+            return super.pay(amount);
         } else {
             if (amount <= (getBalance() + this.creditFunds)) {
-                if (super.pay(getBalance())) {
-                    amount -= getBalance();
+                double balance = getBalance();
+                if (super.pay(balance)) {
+                    amount -= balance;
                     this.creditFunds -= amount;
-                    System.out.println("Платеж на сумму: " + amount + " успешно проведен.");
-                    showAvailableFunds();
+                    System.out.println("Остаток платежа: " + amount + " списан за счет кредитных средств.");
                     return true;
                 } else {
                     return false;
                 }
             } else {
+                System.out.println("Для проведения платежа недостаточно денежных средств.");
                 return false;
             }
         }

@@ -20,4 +20,19 @@ public abstract class DebitCard extends BankCard {
     public DebitCard(double initialBalance) {
         super(initialBalance);
     }
+
+    @Override
+    protected void deposit(double amount) {
+        super.deposit(amount);
+    }
+
+    @Override
+    protected Boolean pay(double amount) {
+        if (super.pay(amount)) {
+            System.out.println("Платеж на сумму: " + amount + " успешно проведен.");
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

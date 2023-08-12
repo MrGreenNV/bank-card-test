@@ -112,7 +112,6 @@ public abstract class CreditCard extends BankCard {
                     return false;
                 }
             } else {
-                System.out.println("Платеж на сумму: " + amount + " не может быть проведен - недостаточно средств.");
                 return false;
             }
         }

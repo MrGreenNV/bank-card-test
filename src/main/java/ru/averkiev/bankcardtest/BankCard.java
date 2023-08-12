@@ -31,12 +31,12 @@ public abstract class BankCard {
      * @param amount сумма пополнения.
      */
     protected void deposit(double amount) {
-        if (amount > 0) {
+        if (amount >= 0) {
             this.balance += amount;
-            System.out.println("Счет успешно пополнен на сумму: " + amount + ". Текущий баланс: " + this.balance);
+            System.out.println("Счет успешно пополнен на сумму: " + amount + ".");
+        } else {
+            System.out.println("Ошибка при пополнении счета.");
         }
-
-        System.out.println("Ошибка при пополнении счета.");
     }
 
     /**

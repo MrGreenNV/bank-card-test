@@ -57,8 +57,9 @@ public final class BonusCreditCard extends CreditCard {
     @Override
     protected Boolean pay(double amount) {
         if (super.pay(amount)) {
-            this.bonus += amount * BONUS_RATE;
-            System.out.println("С покупки на сумму: " + amount + " накоплено бонусов - " + this.bonus + ".");
+            double bonus = amount * BONUS_RATE;
+            this.bonus += bonus;
+            System.out.println("С покупки на сумму: " + amount + " накоплено бонусов - " + bonus + ".");
             return true;
         } else {
             return false;

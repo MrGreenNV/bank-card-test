@@ -7,7 +7,7 @@ import java.time.temporal.ChronoUnit;
  * Класс представляет собой функционал дебетовой карты с потенциальным кэшбэком.
  * @author mrGreenNV
  */
-public class CashbackDebitCard extends DebitCard {
+public final class CashbackDebitCard extends DebitCard {
 
     /**
      * Размер потенциального кэшбэка.

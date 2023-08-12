@@ -59,7 +59,7 @@ public abstract class BankCard {
      * Возвращает текущий баланс счета.
      * @return значение баланса.
      */
-    protected double getBalance() {
+    protected final double getBalance() {
         return this.balance;
     }
 

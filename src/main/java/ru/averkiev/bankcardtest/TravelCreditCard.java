@@ -1,6 +1,7 @@
 package ru.averkiev.bankcardtest;
 
 /**
+ * Класс представляет собой функционал кредитной карты с накоплением миль.
  * @author mrGreenNV
  */
 public class TravelCreditCard extends CreditCard {

@@ -71,11 +71,12 @@ public final class CashbackDebitCard extends DebitCard {
                 double cashback = amount * CASHBACK_RATE;
                 this.cashback += cashback;
                 System.out.println("С покупки на сумму: " + amount + " возвращено кэшбэком - " + cashback + ".");
-            } else if (amount > MIN_AMOUNT_FOR_CASHBACK) {
-                double cashback = (amount - MIN_AMOUNT_FOR_CASHBACK) * CASHBACK_RATE;
+            } else if (amountInCurrentPeriod + amount > MIN_AMOUNT_FOR_CASHBACK) {
+                double cashback = (amountInCurrentPeriod + amount - MIN_AMOUNT_FOR_CASHBACK) * CASHBACK_RATE;
                 this.cashback += cashback;
                 System.out.println("С покупки на сумму: " + amount + " возвращено кэшбэком - " + cashback + ".");
             }
+            this.amountInCurrentPeriod += amount;
             return true;
         } else {
             return false;
